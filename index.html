@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form id="student-form">
+            <h1>Enter Student Details</h1>
+            <div class="input-group">
+                <label for="name">Name:</label>
+                <input id="name" type="text" placeholder="Ex: Kavin">
+            </div>
+            <div class="input-group">
+                <label for="num">Phone Number:</label>
+                <input id="num" type="tel" placeholder="Ex: 9876543210">
+            </div>
+            <div class="input-group">
+                <label for="age">Age:</label>
+                <input id="age" type="number" placeholder="Ex: 22">
+            </div>
+            <div class="input-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <input name="gender" type="radio" value="Male" id="male">
+                    <label for="male">Male</label>
+                    <input name="gender" type="radio" value="Female" id="female">
+                    <label for="female">Female</label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label for="prolag">Programming Language:</label>
+                <select id="prolag">
+                    <option value="Select">Select</option>
+                    <option value="Python">Python</option>
+                    <option value="Java">Java</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <button type="button" onclick="add()">Save</button>
+            </div>
+        </form>
+        <ul id="list"></ul>
+    </div>
+    <script>
+        var ul = document.getElementById("list");
+
+        function add() {
+            var name = document.getElementById("name").value;
+            var num = document.getElementById("num").value;
+            var age = document.getElementById("age").value;
+            var gender = document.querySelector('input[name="gender"]:checked')?.value;
+            var prolag = document.getElementById("prolag").value;
+
+            if (name && num && age && gender && prolag && prolag !== "Select") {
+                var li = document.createElement("li");
+                li.className = 'task';
+                li.innerHTML = `${name} ${num} ${age} ${gender} ${prolag} <button onclick="remove(event)">Delete</button>`;
+                ul.append(li);
+                clearForm();
+            } else {
+                alert("Please fill out all fields.");
+            }
+        }
+
+        function remove(event) {
+            event.target.parentElement.remove();
+        }
+
+        function clearForm() {
+            document.getElementById("student-form").reset();
+        }
+    </script>
+</body>
+</html>
